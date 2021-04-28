@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.prod.js",
     "prettier": "prettier --check **/*.js **/*.js",
     "prettier:fix": "prettier --write **/*.js",
-    "doc": "jsdoc -c jsdoc.conf.json -d docs",
+    "doc": "jsdoc -c jsdoc.conf.json -d docs"
   },
   "dependencies": {
     "react": "^17.0.2",
