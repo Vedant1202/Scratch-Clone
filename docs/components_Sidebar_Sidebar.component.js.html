@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Sidebar/Sidebar.component.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Sidebar/Sidebar.component.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import Icon from '../Icon/Icon.component';
+import { connect } from 'react-redux';
+
+import { selectCurrentEvent } from '../../redux/events/events.selector';
+import { createStructuredSelector } from 'reselect';
+
+/**
+ * Component for Side bar .
+ *
+ * @component
+ * @example
+ * const drag = () => {}
+ * const drop = () => {}
+ * const dragover = () => {}
+ * return (
+ *   &lt;Sidebar dragHandler={drag} dropHandler={drop} dragoverHandler={dragover} />
+ * )
+ */
+function Sidebar({ dragHandler, dropHandler }) {
+  return (
+    &lt;div
+      className="w-60 flex-none h-full overflow-y-auto flex flex-col items-start p-2 border-r border-gray-200"
+      onDrop={dropHandler}
+      onDragOver={() => {}}
+    >
+      &lt;div className="font-bold"> {'Events'} &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'event-0')}
+      >
+        {'When '}
+        &lt;Icon name="flag" size={15} className="text-green-600 mx-2" />
+        {'clicked'}
+      &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'event-1')}
+      >
+        {'When'}
+        &lt;select
+          defaultValue={'space'}
+          style={{
+            color: '#000',
+            margin: '0 2px 0 2px',
+          }}
+        >
+          &lt;option value="space">Space&lt;/option>
+          &lt;option value="control">CTRL&lt;/option>
+          &lt;option value="shift">Shift&lt;/option>
+          &lt;option value="m">M&lt;/option>
+        &lt;/select>
+        {'clicked'}
+      &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'event-2')}
+      >
+        {'When Sprite clicked'}
+      &lt;/div>
+      &lt;div className="font-bold"> {'Motion'} &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'motion-0')}
+      >
+        Move
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+        steps
+      &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'motion-1')}
+      >
+        Turn
+        &lt;Icon name="undo" size={15} className="text-white mx-2" />
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+        degrees
+      &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'motion-2')}
+      >
+        Turn
+        &lt;Icon name="redo" size={15} className="text-white mx-2" />
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+        degrees
+      &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'motion-3')}
+      >
+        Go to x:
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+        y:
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+      &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'motion-4')}
+      >
+        Point at direction
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+      &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'motion-5')}
+      >
+        Change X by
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+      &lt;/div>
+
+      &lt;div
+        className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'motion-6')}
+      >
+        Set X to
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+      &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'motion-7')}
+      >
+        Change Y by
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+      &lt;/div>
+
+      &lt;div
+        className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'motion-8')}
+      >
+        Set Y to
+        &lt;input
+          type="number"
+          style={{
+            marginRight: '4px',
+            marginLeft: '4px',
+            width: '50px',
+            color: '#000',
+          }}
+          value={10}
+          readOnly
+        />
+      &lt;/div>
+      &lt;div className="font-bold"> {'Looks'} &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-purple-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'looks-0')}
+      >
+        Toggle Say Hello
+      &lt;/div>
+      &lt;div
+        className="flex flex-row flex-wrap bg-purple-500 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+        draggable={true}
+        onDragStart={(ev) => dragHandler(ev, 'looks-1')}
+      >
+        Toggle Think Hmmm...
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+/**
+ * Map redux state to component props
+ *  @returns {Object&lt;Function>} Object containing functions to retrieve redux state data
+ */
+const mapStateToProps = createStructuredSelector({
+  currentEvent: selectCurrentEvent,
+});
+
+export default connect(mapStateToProps)(Sidebar);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="CatSprite.html">CatSprite</a></li><li><a href="Icon.html">Icon</a></li><li><a href="MidArea.html">MidArea</a></li><li><a href="PreviewArea.html">PreviewArea</a></li><li><a href="Sidebar.html">Sidebar</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkIfDualInputsPresent">checkIfDualInputsPresent</a></li><li><a href="global.html#degreesToRadians">degreesToRadians</a></li><li><a href="global.html#dragoverHandler">dragoverHandler</a></li><li><a href="global.html#dragStartHandler">dragStartHandler</a></li><li><a href="global.html#dropHandler">dropHandler</a></li><li><a href="global.html#EventActionTypes">EventActionTypes</a></li><li><a href="global.html#getAdjustedHeightAndWidth">getAdjustedHeightAndWidth</a></li><li><a href="global.html#getAngleToTurn">getAngleToTurn</a></li><li><a href="global.html#getChainComponentsData">getChainComponentsData</a></li><li><a href="global.html#getMainComponentsData">getMainComponentsData</a></li><li><a href="global.html#mapDispatchToProps">mapDispatchToProps</a></li><li><a href="global.html#mapStateToProps">mapStateToProps</a></li><li><a href="global.html#performEventsFunction">performEventsFunction</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Apr 28 2021 15:57:14 GMT+0530 (India Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
