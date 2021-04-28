@@ -52,15 +52,6 @@ npm start
 # Go to the browser at -  http://localhost:3000
 ```
 
-Running in production:
-
-```bash
-yarn build
-# OR
-npm run build
-# Production files stored in build folder
-```
-
 Linting:
 
 ```bash
