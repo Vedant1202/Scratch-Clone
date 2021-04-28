@@ -1,0 +1,78 @@
+.child-droppable-area {
+    background-color: white;
+}
+
+.child-droppable-area:hover {
+    background-color: lightgray;
+}
+
+.child-droppable-area:active {
+    background-color: lightgray;
+}
+
+
+div.bubble {
+    position: relative;
+	width: 160px;
+	text-align: center;
+    line-height: 1.2em;
+    margin: 0 0 10px 14%;
+	/* margin: 40px auto; */
+	background-color: #fff;
+	border: 2px solid #333;
+	border-radius: 30px;
+	font-family: sans-serif;
+	padding: 20px;
+	font-size: large;
+}
+
+div.thought {
+	width: 160px;
+	border-radius: 200px;
+	padding: 30px;	
+}
+
+div.bubble:before,
+div.bubble:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+
+/* div.speech:before {
+	left: 30px;
+	bottom: -50px;
+	border: 25px solid;
+	border-color: #333 transparent transparent #333;
+}
+
+div.speech:after {
+	left: 38px;
+	bottom: -30px;
+	border: 15px solid;
+	border-color: #fff transparent transparent #fff;
+} */
+
+div.thought:before,
+div.thought:after {
+	left: 10px;
+	bottom: -15px;
+	width: 20px;
+	height: 20px;
+	background-color: #fff;
+	border: 2px solid #333;
+	-webkit-border-radius: 28px;
+	-moz-border-radius: 28px;
+	border-radius: 28px;
+}
+
+div.thought:after {
+	width: 10px;
+	height: 10px;
+	left: 5px;
+	bottom: -20px;
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+}
