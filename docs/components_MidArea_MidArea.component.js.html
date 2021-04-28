@@ -31,7 +31,12 @@ import Icon from '../Icon/Icon.component';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { setCurrentEvent, setActiveEvent, setComponentValues, setEventListenerData } from '../../redux/events/events.actions';
+import {
+  setCurrentEvent,
+  setActiveEvent,
+  setComponentValues,
+  setEventListenerData,
+} from '../../redux/events/events.actions';
 import { selectCurrentEvent, selectActiveEvent, selectComponentValues } from '../../redux/events/events.selector';
 
 import { getAdjustedHeightAndWidth, checkIfDualInputsPresent } from './MidArea.utils';
@@ -51,10 +56,10 @@ import { dragoverHandler } from '../../dragdrop/dragdrop.controller';
  * )
  */
 class MidArea extends Component {
-    /**
- * Contructor
- * @param {Object} props props 
- */
+  /**
+   * Contructor
+   * @param {Object} props props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -71,17 +76,17 @@ class MidArea extends Component {
     };
   }
 
-    /**
- * Retreive child component data
- * @param {String} [type] type of component    
- * @param {Number} [key] key of component
- * @param {Number} [width] width of component
- * @param {Number} [height] height of component
- * @param {Number} [x] x coord of component
- * @param {Number} [y] y coord of component
- * @param {Function} [dragoverFn] dragover function
- * @param {Boolean} [isChild=false] check if has children
- */
+  /**
+   * Retreive child component data
+   * @param {String} [type] type of component
+   * @param {Number} [key] key of component
+   * @param {Number} [width] width of component
+   * @param {Number} [height] height of component
+   * @param {Number} [x] x coord of component
+   * @param {Number} [y] y coord of component
+   * @param {Function} [dragoverFn] dragover function
+   * @param {Boolean} [isChild=false] check if has children
+   */
   getElement = (type, width, height, x, y, key, dragoverFn, isChild = false) => {
     const { childrenData, componentValues } = this.state;
     const children = [];
@@ -1028,13 +1033,13 @@ class MidArea extends Component {
   };
 
   /**
- * Retreive child component data
- * @param {String} [type] type of component    
- * @param {Number} [key] key of component
- * @param {Number} [parentKey] key of parent component
- * @param {Number} [width] width of parent component
- * @param {Number} [height] height of parent component
- */
+   * Retreive child component data
+   * @param {String} [type] type of component
+   * @param {Number} [key] key of component
+   * @param {Number} [parentKey] key of parent component
+   * @param {Number} [width] width of parent component
+   * @param {Number} [height] height of parent component
+   */
   getChildElement = (type, width, height, key, parentKey) => {
     const { componentValues } = this.state;
 
@@ -1619,11 +1624,11 @@ class MidArea extends Component {
   };
 
   /**
- * Handle event listener change
- * @param {Object} ev event data 
- * @param {Number} [eventId] key of event
- * @param {String} [type] type of component    
- */
+   * Handle event listener change
+   * @param {Object} ev event data
+   * @param {Number} [eventId] key of event
+   * @param {String} [type] type of component
+   */
   handleEventListenerChange = (ev, eventId, type) => {
     ev.preventDefault();
     const { events, eventListenerActive } = this.state;
@@ -1648,10 +1653,10 @@ class MidArea extends Component {
   };
 
   /**
- * Handle the active event
- * @param {Object} ev event data 
- * @param {Number} [eventId] key of event  
- */
+   * Handle the active event
+   * @param {Object} ev event data
+   * @param {Number} [eventId] key of event
+   */
   activeEventHandler = (ev, eventId) => {
     ev.preventDefault();
     const { activeEvent } = this.state;
@@ -1667,12 +1672,12 @@ class MidArea extends Component {
   };
 
   /**
- * Handle input field change
- * @param {Object} ev event data 
- * @param {Number} [elementId] key of component  
- * @param {Number} [position=null] position of element  
- * @param {Boolean} [isDual=false] does element contain multiple input fields
- */
+   * Handle input field change
+   * @param {Object} ev event data
+   * @param {Number} [elementId] key of component
+   * @param {Number} [position=null] position of element
+   * @param {Boolean} [isDual=false] does element contain multiple input fields
+   */
   handleElementValueChange = (ev, elemId, isDual = false, position = null) => {
     const { componentValues } = this.state;
     if (isDual) {
@@ -1693,10 +1698,10 @@ class MidArea extends Component {
   };
 
   /**
- * Handle dropdown input change
- * @param {Object} ev event data 
- * @param {Number} [elementId] key of component  
- */
+   * Handle dropdown input change
+   * @param {Object} ev event data
+   * @param {Number} [elementId] key of component
+   */
   handleDropdownChange = (ev, elemId) => {
     const { componentValues } = this.state;
     componentValues[elemId] = ev.target.value;
@@ -1712,21 +1717,35 @@ class MidArea extends Component {
   };
 
   /**
- * Handle drop on MidArea for child components
- * @param {Object} ev event data 
- * @param {Number} prevHeight height of parentDiv 
- * @param {Number} prevWidth width of parentDiv 
- * @param {Number} parentKey key of parent
- * @param {Number} [defaultValue=10] value of component input 
- * @param {String} [defaultDropdownValue=space] value of component dropdown
- */
+   * Handle drop on MidArea for child components
+   * @param {Object} ev event data
+   * @param {Number} prevHeight height of parentDiv
+   * @param {Number} prevWidth width of parentDiv
+   * @param {Number} parentKey key of parent
+   * @param {Number} [defaultValue=10] value of component input
+   * @param {String} [defaultDropdownValue=space] value of component dropdown
+   */
   dropInChain = (ev, prevHeight, prevWidth, parentKey, defaultValue = 10, defaultDropdownValue = 'space') => {
     ev.preventDefault();
     const { componentsData, elementId, isRedraggingComponent, redragId } = this.state;
     let { childrenData, events, componentValues } = this.state;
     const typeElement = sessionStorage.getItem('typeElement');
 
-    ({ childrenData, events, componentValues } = getChainComponentsData(prevHeight, prevWidth, parentKey, defaultValue, defaultDropdownValue, childrenData, componentsData, elementId, events, componentValues, isRedraggingComponent, redragId, typeElement));
+    ({ childrenData, events, componentValues } = getChainComponentsData(
+      prevHeight,
+      prevWidth,
+      parentKey,
+      defaultValue,
+      defaultDropdownValue,
+      childrenData,
+      componentsData,
+      elementId,
+      events,
+      componentValues,
+      isRedraggingComponent,
+      redragId,
+      typeElement
+    ));
 
     this.setState(
       {
@@ -1742,14 +1761,14 @@ class MidArea extends Component {
   };
 
   /**
- * Handle drop on MidArea for parent components
- * @param {Object} ev event data 
- * @param {Number} [defaultValue=10] value of component input 
- * @param {String} [defaultDropdownValue=space] value of component dropdown
- */
+   * Handle drop on MidArea for parent components
+   * @param {Object} ev event data
+   * @param {Number} [defaultValue=10] value of component input
+   * @param {String} [defaultDropdownValue=space] value of component dropdown
+   */
   drop = (ev, defaultValue = 10, defaultDropdownValue = 'space') => {
     ev.preventDefault();
-    
+
     const { elementId, isRedraggingComponent, redragId } = this.state;
     let { componentsData, childrenData, events, componentValues } = this.state;
     const ogwidth = sessionStorage.getItem('screenX');
@@ -1757,7 +1776,20 @@ class MidArea extends Component {
     const typeElement = sessionStorage.getItem('typeElement');
     let { newHeight, newWidth } = getAdjustedHeightAndWidth(ogheight, ogwidth, 64, 160, 40);
 
-    ({ componentsData, childrenData, events, componentValues } = getMainComponentsData(defaultValue, defaultDropdownValue, componentsData, childrenData, elementId, events, componentValues, isRedraggingComponent, redragId, newHeight, newWidth, typeElement));
+    ({ componentsData, childrenData, events, componentValues } = getMainComponentsData(
+      defaultValue,
+      defaultDropdownValue,
+      componentsData,
+      childrenData,
+      elementId,
+      events,
+      componentValues,
+      isRedraggingComponent,
+      redragId,
+      newHeight,
+      newWidth,
+      typeElement
+    ));
 
     this.setState(
       {
@@ -1776,16 +1808,16 @@ class MidArea extends Component {
   };
 
   /**
- * Handle dragover event on MidArea
- * @param {Object} ev event data
- */
+   * Handle dragover event on MidArea
+   * @param {Object} ev event data
+   */
   dragHandler = (ev) => {
     dragoverHandler(ev);
   };
 
-    /**
- * Render the component
- */
+  /**
+   * Render the component
+   */
   render() {
     const { componentsData } = this.state;
 
@@ -1874,7 +1906,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(MidArea);
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Apr 28 2021 15:57:14 GMT+0530 (India Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Apr 28 2021 16:03:48 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
