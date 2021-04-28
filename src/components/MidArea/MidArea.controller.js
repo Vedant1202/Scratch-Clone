@@ -124,7 +124,7 @@ const getMainComponentsData = (
       componentsData[existingComponentIndex].x = newWidth;
     } else {
       existingComponentIndex = childrenData.findIndex((component) => component.key === redragId);
-      removedComponent = childrenData.splice(existingComponentIndex, 1);
+      const removedComponent = childrenData.splice(existingComponentIndex, 1);
       componentsData.push({
         ...removedComponent[0],
         children: [],
