@@ -1,13 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import "tailwindcss/tailwind.css";
+// wrapper-component.js
 
-console.log("hi");
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import 'tailwindcss/tailwind.css';
+
+import { Provider } from 'react-redux';
+
+// import { PersistGate } from 'redux-persist/integration/react';
+// import { store, persistor } from './redux/store';
+import { store } from './redux/store';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+  <Provider store={store}>
+    <React.StrictMode>
+      {/* <PersistGate persistor={persistor}> */}
+      <App />
+      {/* </PersistGate> */}
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById('root')
 );
